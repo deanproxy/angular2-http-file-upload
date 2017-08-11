@@ -39,8 +39,8 @@ var Uploader = (function () {
             _this.onProgressUpload(item, progress);
         };
         xhr.onload = function () {
-            var headers = _this.parseHeaders(xhr.getAllResponseHeaders().toLowerCase());
-            var response = _this.parseResponse(headers['content-type'], xhr.response);
+            var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
+            var response = _this.parseResponse(xhr.getResponseHeader('content-type'), xhr.response);
             if (_this.isSuccessStatus(xhr.status)) {
                 _this.onSuccessUpload(item, response, xhr.status, headers);
             }
@@ -50,14 +50,14 @@ var Uploader = (function () {
             _this.onCompleteUpload(item, response, xhr.status, headers);
         };
         xhr.onerror = function () {
-            var headers = _this.parseHeaders(xhr.getAllResponseHeaders().toLowerCase());
-            var response = _this.parseResponse(headers['content-type'], xhr.response);
+            var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
+            var response = _this.parseResponse(xhr.getResponseHeader('content-type'), xhr.response);
             _this.onErrorUpload(item, response, xhr.status, headers);
             _this.onCompleteUpload(item, response, xhr.status, headers);
         };
         xhr.onabort = function () {
-            var headers = _this.parseHeaders(xhr.getAllResponseHeaders().toLowerCase());
-            var response = _this.parseResponse(headers['content-type'], xhr.response);
+            var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
+            var response = _this.parseResponse(xhr.getResponseHeader('content-type'), xhr.response);
             _this.onCancelUpload(item, response, xhr.status, headers);
             _this.onCompleteUpload(item, response, xhr.status, headers);
         };

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var UploadItem = (function () {
     function UploadItem() {
         this.method = 'POST';
@@ -12,4 +13,3 @@ var UploadItem = (function () {
     return UploadItem;
 }());
 exports.UploadItem = UploadItem;
-//# sourceMappingURL=upload-item.js.map

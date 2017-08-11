@@ -5,10 +5,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require('@angular/core');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var Uploader = (function () {
     function Uploader() {
         this.onProgressUpload = function (item, progress) { };
@@ -42,7 +40,8 @@ var Uploader = (function () {
         };
         xhr.onload = function () {
             var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
-            var response = _this.parseResponse(headers['Content-Type'], xhr.response);
+            var contentType = headers['Content-Type'] || headers['content-type'];
+            var response = _this.parseResponse(contentType, xhr.response);
             if (_this.isSuccessStatus(xhr.status)) {
                 _this.onSuccessUpload(item, response, xhr.status, headers);
             }
@@ -53,13 +52,15 @@ var Uploader = (function () {
         };
         xhr.onerror = function () {
             var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
-            var response = _this.parseResponse(headers['Content-Type'], xhr.response);
+            var contentType = headers['Content-Type'] || headers['content-type'];
+            var response = _this.parseResponse(contentType, xhr.response);
             _this.onErrorUpload(item, response, xhr.status, headers);
             _this.onCompleteUpload(item, response, xhr.status, headers);
         };
         xhr.onabort = function () {
             var headers = _this.parseHeaders(xhr.getAllResponseHeaders());
-            var response = _this.parseResponse(headers['Content-Type'], xhr.response);
+            var contentType = headers['Content-Type'] || headers['content-type'];
+            var response = _this.parseResponse(contentType, xhr.response);
             _this.onCancelUpload(item, response, xhr.status, headers);
             _this.onCompleteUpload(item, response, xhr.status, headers);
         };
@@ -103,10 +104,8 @@ var Uploader = (function () {
         return parsed;
     };
     Uploader = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        core_1.Injectable()
     ], Uploader);
     return Uploader;
 }());
 exports.Uploader = Uploader;
-//# sourceMappingURL=uploader.js.map
